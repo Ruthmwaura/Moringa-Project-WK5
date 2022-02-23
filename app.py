@@ -2,8 +2,9 @@ import pandas as pd
 import plotly.express as px
 import streamlit as st
 
-st.set_page_config(page_title="POST PANDEMIC EFFECTS OF COVID-19", layout="wide"
-                  )
+st.set_page_config(page_title="POST PANDEMIC EFFECTS OF COVID-19", layout="wide",
+                  page_icon = ":covid:",
+)  
 
 df = pd.read_csv(
     io = 'owid-covid-data.csv',
@@ -15,3 +16,6 @@ df = pd.read_csv(
 )
 
 print(df.head())
+
+
+st.dataframe(df)
