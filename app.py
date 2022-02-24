@@ -10,7 +10,7 @@ data = pd.read_csv("owid-covid-data.csv")
 
 
 selected = st.sidebar.selectbox("Select the section", [
-                                'Dataset', 'Mortality Rates', 'Vaccine Coverage', 'Effect of COVID on Continents', 'Overall Population Change', 'Stringency Index'])
+                                'Dataset', 'Mortality Rates', 'Vaccine Coverage', 'Effect of COVID on Continents', 'Overall Population Change', 'Stringency Index', 'life expectancy'])
 
 st.markdown('The table above is the general outlook of our dataset.')
 
@@ -48,7 +48,7 @@ elif selected == 'Overall Population Change':
         data['population_diff'].value_counts()).head(5)
     st.bar_chart(population_difference_distribution)
     st.markdown('The tabulated bar graph above shows the population difference.')
-else:
+elif selected == 'Stringency Index':
     # QUESTION 6: Let’s investigate the changes in stringency index
     # as a result of COVID deaths in Kenya, Malaysia, Spain, Venezuela, Panama
     stringency = pd.DataFrame(
@@ -56,3 +56,10 @@ else:
     st.line_chart(stringency)
     st.markdown(
         'The tabulated line graph above shows the stringency index fluctuations in different continents.')
+else:
+    # QUESTION 7: Let’s find the changes in life expectancy as a result of COVID-19
+    life_expectancy = pd.DataFrame(
+        data[['continent', 'life_expectancy']].groupby('continent').mean())
+    st.line_chart(life_expectancy)
+    st.markdown(
+        'The tabulated line graph above shows the life expectancy changes in different continents.')
